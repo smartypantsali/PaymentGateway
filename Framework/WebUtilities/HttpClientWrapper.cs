@@ -11,9 +11,9 @@ namespace Framework.WebUtilities
     /// </summary>
     public class HttpClientWrapper : IHttpClientWrapper
     {
-        private HttpClient httpClient = new HttpClient();
+        private HttpClient _httpClient = new HttpClient();
 
-        public Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent content) => httpClient.PostAsync(requestUri, content);
-        public void Dispose() => httpClient.Dispose();
+        public Task<HttpResponseMessage> PostAsync(string requestUri, HttpContent content) => _httpClient.PostAsync(requestUri, content);
+        public void Dispose() => _httpClient.Dispose();
     }
 }
