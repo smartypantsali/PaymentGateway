@@ -41,6 +41,19 @@ namespace PaymentGateway.WebApiTests.Models
             Assert.AreEqual(res.State, paymentDto.State);
         }
 
+        [TestMethod]
+        public void ToModel_PaymentDto_Null_Returns_Null()
+        {
+            // Arrange
+            PaymentDto paymentDto = null;
+
+            // Act
+            var res = paymentDto.ToModel();
+
+            // Assert
+            Assert.AreEqual(res, paymentDto);
+        }
+
         #endregion ToModel Tests
     }
 }

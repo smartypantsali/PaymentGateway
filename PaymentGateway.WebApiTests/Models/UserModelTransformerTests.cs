@@ -35,6 +35,19 @@ namespace PaymentGateway.WebApiTests.Models
             Assert.AreEqual(res.Permissions.Count(), userDto.Permissions.Length);
         }
 
+        [TestMethod]
+        public void ToModel_UserDto_Null_Returns_Null()
+        {
+            // Arrange
+            UserDto userDto = null;
+
+            // Act
+            var res = userDto.ToModel();
+
+            // Assert
+            Assert.AreEqual(res, userDto);
+        }
+
         #endregion ToModel Tests
     }
 }
