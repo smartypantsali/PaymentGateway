@@ -17,7 +17,7 @@
 - Improve logging to be deeper, and log the entire process of endpoint in a context, with less clutter.
 - Use a logging tool like "Seq"
 - Application metrics
-- Encryption
+- Encryption for card details. Password already being hashed.
 - Endpoints to be configured and accessed via folder structure
 - Create script to execute and cache config values
 
