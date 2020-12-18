@@ -8,7 +8,7 @@
 - Environment configuration
 
 ## Assumptions made:
-- "Acquiring  Bank" part of the process, is an endpoint to be called. Therefore I created a new endpoint for it and Mocked it by using HttpClient object. This will only return a unique id and 200 status code. I left it as mvp as possible as it is just for mocking.
+- "Acquiring  Bank" part of the process, is an endpoint to be called. Therefore I created a new endpoint for it and Mocked it by using HttpClient object and callin it. This will only return a unique id and 200 status code. I left it as mvp as possible as it is just for mocking.
 - Merchant will require Authorisation  / Authentication.
 - Masking card numbers to be displayed like "****20" for example.
 - Checking the validity of the card by using Luhn algorithm.
