@@ -156,18 +156,18 @@ namespace PaymentGateway.WebApi.Controllers
                 return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
             }
 
-            // Reload permissions if updating loggedIn users permissions
+            // Reload HttpContext by signing out then in again to reset Permissions in Claim
             var claimantsName = User.FindFirst(ClaimTypes.Name)?.Value;
             if (claimantsName != null && claimantsName == userDto.Username)
             {
                 // Remove previous permission claim
                 var permissionClaim = User.FindFirst(Constants.PermissionClaimType);
-                User.Identities.FirstOrDefault(i => i.AuthenticationType == Constants.PaymentIdentity).RemoveClaim(permissionClaim);
+                User.Identities.FirstOrDefault(i => i.AuthenticationType == Constants.PaymentIdentity)?.RemoveClaim(permissionClaim);
 
                 // Add new permission claim
                 var jsonPermissions = JsonSerializer.Serialize(userDto.Permissions);
                 var newPermissionClaim = new Claim(Constants.PermissionClaimType, jsonPermissions ?? string.Empty);
-                User.Identities.FirstOrDefault(i => i.AuthenticationType == Constants.PaymentIdentity).AddClaim(newPermissionClaim);
+                User.Identities.FirstOrDefault(i => i.AuthenticationType == Constants.PaymentIdentity)?.AddClaim(newPermissionClaim);
 
                 // Destroy any existing authentication and then re-login
                 await HttpContext.SignOutAsync();
@@ -184,7 +184,7 @@ namespace PaymentGateway.WebApi.Controllers
         /// <returns></returns>
         [HttpGet("{uid}")]
         [Authorize]
-        public ActionResult<UserModel> GetPayment(string uid)
+        public ActionResult<UserModel> GetUserByUid(string uid)
         {
             var userDto = _userBLL.GetByUserUid(uid);
             if (userDto == null)

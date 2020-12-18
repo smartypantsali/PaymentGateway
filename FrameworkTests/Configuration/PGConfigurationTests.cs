@@ -43,12 +43,14 @@ namespace FrameworkTests.Configuration
             PGConfiguration.SetKeyValues(configurationSections);
             var key1Result = PGConfiguration.TryGetValue(key1);
             var key2Result = PGConfiguration.TryGetValue(key2);
+            var nonexistantKeyResult = PGConfiguration.TryGetValue("Random");
 
             // Assert
             configRootMock.Verify();
             configRootMock2.Verify();
             Assert.AreEqual(key1Result, value1);
             Assert.AreEqual(key2Result, value2);
+            Assert.AreEqual(nonexistantKeyResult, null);
         }
 
         #endregion SetKeyValuesAndTryGetValue Tests

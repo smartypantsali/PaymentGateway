@@ -1,10 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Framework.Enums;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PaymentGateway.WebApi.Domain;
+using PaymentGateway.WebApi.Models;
+using System.Linq;
 
 namespace PaymentGateway.WebApiTests.Models
 {
-    class UserModelTransformerTests
+    [TestClass]
+    public class UserModelTransformerTests
     {
+        #region ToModel Tests
+
+        [TestMethod]
+        public void ToModel_Returns_UserModel()
+        {
+            // Arrange
+            var userDto = new UserDto()
+            {
+                Uid = "123",
+                Username = "Name",
+                Permissions = new Permission[]
+                {
+                    Permission.Payment_Create,
+                    Permission.Payment_View
+                }
+            };
+
+            // Act
+            var res = userDto.ToModel();
+
+            // Assert
+            Assert.AreEqual(res.Uid, userDto.Uid);
+            Assert.AreEqual(res.Username, userDto.Username);
+            Assert.AreEqual(res.Permissions.Count(), userDto.Permissions.Length);
+        }
+
+        #endregion ToModel Tests
     }
 }

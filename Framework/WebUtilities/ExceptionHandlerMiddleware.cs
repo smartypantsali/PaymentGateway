@@ -32,7 +32,7 @@ namespace Framework.WebUtilities
 			// Log exception
 			var id = httpContext.User.Identity;
 			Log.Error($"TraceIdentifier: {httpContext.TraceIdentifier}\n"
-				+ $"Request URI: {httpContext.Request.Method} {httpContext.Request.GetEncodedUrl()}\n"
+				+ $"Request URI: {httpContext.Request?.Method} {httpContext.Request?.GetEncodedUrl()}\n"
 				+ $"Request user: {id?.Name ?? "(anon)"}\n");
 
 			// Output exception detail

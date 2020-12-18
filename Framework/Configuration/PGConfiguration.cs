@@ -32,7 +32,7 @@ namespace Framework.Configuration
         /// <returns></returns>
         public static string TryGetValue(string key)
         {
-            return _keyValues[key];
+            return _keyValues.TryGetValue(key, out var val) ? val : null;
         }
     }
 }

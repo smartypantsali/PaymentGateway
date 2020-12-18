@@ -20,11 +20,11 @@ namespace PaymentGateway.WebApi.Models.ValidationProviders
 
         public PaymentModelValidationProvider()
         {
-            // Initialise config values to validate model
-            _minAmount = decimal.Parse(PGConfiguration.TryGetValue("MinAmount"));
-            _maxAmount = decimal.Parse(PGConfiguration.TryGetValue("MaxAmount"));
-            _supportedCurrencies = PGConfiguration.TryGetValue("SupportedCurrencies")
-                                        .Split(',', StringSplitOptions.RemoveEmptyEntries).Select(str => str.Trim()).ToHashSet();
+            // Initialise config values to validate model, defaults are assigned if not found
+            _minAmount = decimal.TryParse(PGConfiguration.TryGetValue("MinAmount"), out var minAmount) ? minAmount : 0;
+            _maxAmount = decimal.TryParse(PGConfiguration.TryGetValue("MaxAmount"), out var maxAmount) ? maxAmount : 10000;
+            _supportedCurrencies = PGConfiguration.TryGetValue("SupportedCurrencies")?
+                                        .Split(',', StringSplitOptions.RemoveEmptyEntries).Select(str => str.Trim()).ToHashSet() ?? new HashSet<string>() { "GBP", "EUR", "USD" };
         }
         
         /// <summary>

@@ -61,7 +61,8 @@ namespace PaymentGateway.WebApi.Domain
                         }
                         break;
                     default:
-                        Log.Error($"Unknown error code with status code: {bankResponse.StatusCode} and TraceIdentifier: {bankResponse.Headers.GetValues("TraceIdentifier")?.ElementAt(0)}");
+                        _ = bankResponse.Headers.TryGetValues("TraceIdentifier", out var tridVal) ? tridVal : null;
+                        Log.Error($"Unknown error code with status code: {bankResponse.StatusCode} and TraceIdentifier: {tridVal}");
                         return false;
                 }
             }
