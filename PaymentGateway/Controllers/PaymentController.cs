@@ -35,7 +35,7 @@ namespace PaymentGateway.WebApi.Controllers
         [HttpPost("")]
         [RequireApiPermission(Permission.Payment_View, Permission.Payment_Create)]
         public async Task<ActionResult<PaymentModel>> CreatePaymentAsync(PaymentModel model)
-        { 
+        {
             var validationResult = _paymentModelValidationProvider.Validate(model);
             if (validationResult != null)
             {

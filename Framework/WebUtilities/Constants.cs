@@ -12,5 +12,7 @@ namespace Framework.WebUtilities
         public const string PermissionClaimType = "Permissions";
 
         public const string PaymentIdentity = "PaymentGateway Identity";
+
+        public const string PGRequestBody = "PGRequestBody";
     }
 }

@@ -29,10 +29,15 @@ namespace Framework.WebUtilities
 			var ex = httpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 			httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+			// Return header to search through logs
+			httpContext.Response.Headers.Add("TraceIdentifier", httpContext.TraceIdentifier);
+
 			// Log exception
 			var id = httpContext.User.Identity;
 			Log.Error($"TraceIdentifier: {httpContext.TraceIdentifier}\n"
 				+ $"Request URI: {httpContext.Request?.Method} {httpContext.Request?.GetEncodedUrl()}\n"
+				+ $"Request Body: {Environment.GetEnvironmentVariable(Constants.PGRequestBody)}\n"
+				+ $"Status Code: {httpContext.Response.StatusCode}\n"
 				+ $"Request user: {id?.Name ?? "(anon)"}\n");
 
 			// Output exception detail
@@ -53,7 +58,6 @@ namespace Framework.WebUtilities
 				httpContext.Response.ContentType = "application/json";
 				await httpContext.Response.WriteAsync(JsonConvert.SerializeObject(shapeException(ex)));
 			}
-			await _next.Invoke(httpContext);
         }
     }
 }
