@@ -18,6 +18,8 @@
 - Use a logging tool like "Seq"
 - Application metrics
 - Encryption
+- Endpoints to be configured and access via folder structure
+- Create script to execute and cache config values
 
 ## There are things to keep in mind, as it will be useful to be aware of:
 - There are 2 main projects in the solution. "Framework" for reusable code. And "PaymentGateway.WebApi" which contains the endpoints. Each has its test projects as well.
