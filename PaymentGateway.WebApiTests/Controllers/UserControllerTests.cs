@@ -256,7 +256,7 @@ namespace PaymentGateway.WebApiTests.Controllers
         }
 
         [TestMethod]
-        public void CreateUser_Failed_Return_500()
+        public void CreateUser_Failed_Returns_500()
         {
             // Arrange
             var userModel = new UserModel
@@ -291,13 +291,14 @@ namespace PaymentGateway.WebApiTests.Controllers
         }
 
         [TestMethod]
-        public void CreateUser_Success_Return_UserModel()
+        public void CreateUser_Success_Returns_UserModel()
         {
             // Arrange
             var userModel = new UserModel
             {
                 Username = "Test",
-                Password = "Test2"
+                Password = "Test2",
+                Permissions = new Permission[] { Permission.Payment_Create }
             };
 
             var validationProviderMock = _mocks.Create<IValidate<UserModel>>();
@@ -307,7 +308,11 @@ namespace PaymentGateway.WebApiTests.Controllers
             var userBLLMock = _mocks.Create<IUserBLL>();
             userBLLMock.Setup(m => m.GetUserByUsername(userModel.Username))
                 .Returns<UserDto>(null);
-            userBLLMock.Setup(m => m.CreateUser(It.IsAny<UserDto>()))
+            userBLLMock.Setup(m => m.CreateUser(It.Is<UserDto>(u => 
+                u.Password == "Hashed" && 
+                u.Username == userModel.Username &&
+                u.Uid != null &&
+                u.Permissions.Count() == userModel.Permissions.Count())))
                 .Returns(true);
 
             var pswHasherMock = _mocks.Create<IPasswordHasher<UserModel>>();

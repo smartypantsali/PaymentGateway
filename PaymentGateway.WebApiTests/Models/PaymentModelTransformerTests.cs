@@ -2,9 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PaymentGateway.WebApi.Domain;
 using PaymentGateway.WebApi.Models;
-using PaymentGateway.WebApi.Models.ValidationProviders;
 using System;
-using System.Text;
 
 namespace PaymentGateway.WebApiTests.Models
 {
@@ -20,6 +18,7 @@ namespace PaymentGateway.WebApiTests.Models
             var paymentDto = new PaymentDto()
             {
                 Uid = "123-45",
+                CardHolderName = "Mr Twinkle",
                 CardNumber = "1234567890123456",
                 ExpiryDate = "2020-12-02",
                 Amount = 123,
@@ -33,6 +32,7 @@ namespace PaymentGateway.WebApiTests.Models
 
             // Assert
             Assert.AreEqual(res.Uid, paymentDto.Uid);
+            Assert.AreEqual(res.CardHolderName, paymentDto.CardHolderName);
             Assert.AreEqual(res.CardNumber, "***********23456");
             Assert.AreEqual(res.ExpiryDate, "********02");
             Assert.AreEqual(res.Amount, paymentDto.Amount);

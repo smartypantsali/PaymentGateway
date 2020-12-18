@@ -17,6 +17,7 @@ namespace PaymentGateway.WebApi.Models
             return new PaymentModel
             {
                 Uid = dto.Uid,
+                CardHolderName = dto.CardHolderName,
                 CardNumber = CommonMethods.MaskString(dto.CardNumber, 5),
                 ExpiryDate = CommonMethods.MaskString(dto.ExpiryDate, 2),
                 Amount = dto.Amount,

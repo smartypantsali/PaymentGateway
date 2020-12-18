@@ -26,7 +26,7 @@ namespace PaymentGateway.WebApiTests.Models.ValidationProviders
 
             // Assert
             var decodedContent = Encoding.UTF8.GetString(res.Content);
-            Assert.AreEqual(decodedContent, "{\"CardNumber\":{\"ErrorCode\":\"missing\"},\"Cvv\":{\"ErrorCode\":\"missing\"},\"ExpiryDate\":{\"ErrorCode\":\"missing\"},\"Amount\":{\"ErrorCode\":\"missing\"},\"Currency\":{\"ErrorCode\":\"missing\"}}");
+            Assert.AreEqual(decodedContent, "{\"CardNumber\":{\"ErrorCode\":\"missing\"},\"Cvv\":{\"ErrorCode\":\"missing\"},\"CardHolderName\":{\"ErrorCode\":\"missing\"},\"ExpiryDate\":{\"ErrorCode\":\"missing\"},\"Amount\":{\"ErrorCode\":\"missing\"},\"Currency\":{\"ErrorCode\":\"missing\"}}");
         }
 
         [TestMethod]
@@ -37,6 +37,7 @@ namespace PaymentGateway.WebApiTests.Models.ValidationProviders
             // Arrange
             var model = new PaymentModel
             {
+                CardHolderName = "Mr Tinkle",
                 CardNumber = "11223344",
                 Cvv = "12",
                 ExpiryDate = dateTimeIsPast ? DateTime.UtcNow.AddDays(-1).ToString() : "123",
@@ -69,6 +70,7 @@ namespace PaymentGateway.WebApiTests.Models.ValidationProviders
             // Arrange
             var model = new PaymentModel
             {
+                CardHolderName = "Mr Tinkle",
                 CardNumber = "4916132996393639",
                 Cvv = "123",
                 ExpiryDate = DateTime.UtcNow.AddDays(1).ToString(),

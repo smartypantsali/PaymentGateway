@@ -1,8 +1,5 @@
 ﻿using Framework.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PaymentGateway.WebApi.Domain
 {
@@ -11,6 +8,8 @@ namespace PaymentGateway.WebApi.Domain
         public long Id { get; set; }
 
         public string Uid { get; set; }
+
+        public string CardHolderName { get; set; }
 
         public string CardNumber { get; set; }
 

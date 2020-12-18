@@ -2,7 +2,6 @@
 using Framework.Interfaces;
 using Framework.WebUtilities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,6 +53,12 @@ namespace PaymentGateway.WebApi.Models.ValidationProviders
             else if (!CommonMethods.IsCvvValid(model.Cvv))
             {
                 validationResults.Enqueue(ValidationResult.ToTeapotResult(ApiOffences.Payment.InvalidCVV, nameof(model.Cvv)));
+            }
+
+            // Check if CardHolderName is missing
+            if (string.IsNullOrWhiteSpace(model.CardHolderName))
+            {
+                validationResults.Enqueue(ValidationResult.ToTeapotResult(ApiOffences.Missing, nameof(model.CardHolderName)));
             }
 
             // Check if ExpiryDate is valid

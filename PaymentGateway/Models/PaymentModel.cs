@@ -1,5 +1,4 @@
 using Framework.Enums;
-using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace PaymentGateway.WebApi.Models
@@ -7,6 +6,8 @@ namespace PaymentGateway.WebApi.Models
     public class PaymentModel
     {
         public string Uid { get; set; }
+
+        public string CardHolderName { get; set; }
 
         public string CardNumber { get; set; }
 

@@ -125,7 +125,9 @@ namespace PaymentGateway.WebApiTests.Domain
             PGConfiguration.SetKeyValues(configurationSections);
 
             var dbContextMock = _mocks.Create<IDatabaseContext>();
-            dbContextMock.Setup(m => m.Insert(It.IsAny<PaymentDto>()))
+            dbContextMock.Setup(m => m.Insert(It.Is<PaymentDto>(p =>
+                 p.Uid == "Fake" &&
+                 p.State == Framework.Enums.PaymentState.Completed)))
                 .Returns(1);
 
             var responseMessage = new HttpResponseMessage();

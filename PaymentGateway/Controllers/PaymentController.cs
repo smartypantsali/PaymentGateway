@@ -44,6 +44,7 @@ namespace PaymentGateway.WebApi.Controllers
 
             var dto = new PaymentDto
             {
+                CardHolderName = model.CardHolderName,
                 CardNumber = model.CardNumber,
                 ExpiryDate = model.ExpiryDate,
                 Amount = model.Amount,
