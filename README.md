@@ -14,6 +14,7 @@
 - Checking the validity of the card by using Luhn algorithm.
 
 ## Improvements that can be made:
+- Stuctured Tables when storing Payments / Card details / Users
 - Improve logging to be deeper, and log the entire process of endpoint in a context, with less clutter.
 - Use a logging tool like "Seq"
 - Application metrics
