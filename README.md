@@ -1,5 +1,8 @@
 # Payment Gateway Web API
 
+## Video Demo:
+https://streamable.com/zvj10o
+
 ## About:
 - API to create and process payments / Get payments. 
 - With Authorisation / Authentication and permission setting
