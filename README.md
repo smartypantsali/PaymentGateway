@@ -8,22 +8,22 @@
 - Environment configuration
 
 ## Assumptions made:
-- "Aquiring Bank" part of process, is an endpoint to be called. Therefore I created a new endpoint for it and Mocked by using HttpClient object. This will only return a unique id and 200 status code. I left it as mvp as possible as it is just for mocking.
-- Merchant will require Auhorisation / Authentication.
+- "Acquiring  Bank" part of the process, is an endpoint to be called. Therefore I created a new endpoint for it and Mocked it by using HttpClient object. This will only return a unique id and 200 status code. I left it as mvp as possible as it is just for mocking.
+- Merchant will require Authorisation  / Authentication.
 - Masking card numbers to be displayed like "****20" for example.
-- Checking validity of card by using Luhn algorithm.
+- Checking the validity of the card by using Luhn algorithm.
 
 ## Improvements that can be made:
-- Improve logging to be more deep, and log entire process of endpoint in a context, with less clutter.
+- Improve logging to be deeper, and log the entire process of endpoint in a context, with less clutter.
 - Use a logging tool like "Seq"
 - Application metrics
 - Encryption
 
 ## There are things to keep in mind, as it will be useful to be aware of:
-- There are 2 main projects in solution. "Framework" for re-usable code. And "PaymentGateway.WebApi" which contains the endpoints. Each has there own test projects as well.
+- There are 2 main projects in the solution. "Framework" for reusable code. And "PaymentGateway.WebApi" which contains the endpoints. Each has its test projects as well.
 - Database used for application is called LiteDB. If you would like to query the information, please refer to: https://github.com/mbdavid/LiteDB.Studio.
 - Logs are stored in a file under "Logs" folder. Endpoint execution can be tracked using "TraceIdentifier" response header, per request.
-- Log file can only be opened once application stops running.
+- Logfile can only be opened once application stops running.
 - Some configuration for application, can be found in "appsettings.json"
 - Before using payments endpoints, user will need to be Authenticated and cache its associated cookie. Users also have access to 2 permissions "["Payment_Create", "Payment_View"]".
 As the only endpoints that allow Anonymous access are User create and login.
